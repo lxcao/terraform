@@ -11,6 +11,9 @@ provider "oci" {
   //no need to use token and profile when it's default
   //auth                = "SecurityToken"
   //config_file_profile = "DEFAULT"
+  //add clingxin profile after running "oci session authenticate"
+    auth                = "SecurityToken"
+    config_file_profile = "clingxin"
 }
 
 resource "oci_core_vcn" "internal" {
