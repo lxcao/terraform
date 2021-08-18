@@ -7,7 +7,7 @@ terraform {
 }
 
 provider "oci" {
-  region              = "eu-frankfurt-1"
+  region              = var.region
   //no need to use token and profile when it's default
   //auth                = "SecurityToken"
   //config_file_profile = "DEFAULT"
@@ -19,15 +19,15 @@ provider "oci" {
 resource "oci_core_vcn" "internal" {
   dns_label      = "internal"
   cidr_block     = "172.16.0.0/20"
-  compartment_id = "ocid1.compartment.oc1..aaaaaaaanwem7xa7q7xubbc4heyap3qnkopittitpxk4a7xp3h4y62mqdlka"
+  compartment_id = var.compartment_id
   display_name   = "My internal VCN"
 }
 
 resource "oci_core_subnet" "dev" {
   vcn_id                      = oci_core_vcn.internal.id
   cidr_block                  = "172.16.0.0/24"
-  compartment_id              = "ocid1.compartment.oc1..aaaaaaaanwem7xa7q7xubbc4heyap3qnkopittitpxk4a7xp3h4y62mqdlka"
-  display_name                = "Dev subnet 1"
+  compartment_id              = var.compartment_id
+  display_name                = "Dev subnet"
   prohibit_public_ip_on_vnic  = true
   dns_label                   = "dev"
 }
