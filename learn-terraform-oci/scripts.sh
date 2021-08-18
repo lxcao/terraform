@@ -5,3 +5,7 @@ terraform fmt
 terraform validate
 terraform apply
 terraform show
+
+oci session authenticate # in case of session no longer valid, renew
+terraform destroy
+
